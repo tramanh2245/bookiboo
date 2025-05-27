@@ -1,0 +1,191 @@
+.aboutWrapper {
+    max-width: 1250px;
+    background: #fffbea;
+    margin: 44px auto 24px auto;
+    border-radius: 20px;
+    padding: 34px 16px 10px 16px;
+    box-shadow: 0 4px 32px rgba(100, 40, 10, 0.08);
+}
+
+/* BANNER */
+.bannerBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.bannerImg {
+    width: 100%;
+    max-width: 770px;
+    border-radius: 25px;
+    box-shadow: 0 6px 40px rgba(100, 50, 10, 0.10), 0 2px 8px rgba(0, 0, 0, 0.05);
+    object-fit: cover;
+    aspect-ratio: 3/1;
+    /* hoặc 16/5, 16/6 tuỳ ảnh bạn */
+}
+
+@media (max-width: 800px) {
+    .bannerImg {
+        max-width: 98vw;
+        border-radius: 13px;
+    }
+}
+
+.introMotion {
+    margin-bottom: 18px;
+}
+
+.pageTitle {
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: #e08513;
+    text-align: center;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+    line-height: 1.22;
+}
+
+.introParagraphs {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    font-size: 1.13rem;
+    margin-bottom: 17px;
+}
+
+.introParagraph {
+    line-height: 1.7;
+}
+
+.gridContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: space-between;
+}
+
+.col1,
+.col2,
+.col3,
+.col4 {
+    flex: 1 1 230px;
+    min-width: 210px;
+    margin-bottom: 22px;
+}
+
+.logo {
+    width: 130px;
+    margin-bottom: 10px;
+}
+
+.companyText {
+    font-size: 1rem;
+    color: #2b2b2b;
+    margin-bottom: 13px;
+    line-height: 1.6;
+}
+
+.socialIcons {
+    display: flex;
+    gap: 13px;
+    margin-bottom: 10px;
+}
+
+.socialIcons a {
+    color: #e08513;
+    font-size: 1.4em;
+    transition: color 0.18s, transform 0.18s;
+}
+
+.socialIcons a:hover {
+    color: #cb2530;
+    transform: scale(1.13);
+}
+
+.colTitle {
+    font-weight: bold;
+    color: #cb2530;
+    margin-bottom: 7px;
+    font-size: 1.09rem;
+    letter-spacing: 0.2px;
+}
+
+ul {
+    padding-left: 0;
+    margin: 0 0 11px 0;
+    list-style: none;
+}
+
+ul li {
+    color: #333;
+    font-size: 0.98rem;
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: color 0.17s;
+}
+
+ul li:hover {
+    color: #e08513;
+    text-decoration: underline;
+}
+
+.shippingPartners,
+.paymentPartners {
+    display: flex;
+    gap: 9px;
+    margin-top: 7px;
+    flex-wrap: wrap;
+}
+
+.shippingPartners img,
+.paymentPartners img {
+    height: 28px;
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 2px 8px rgba(50, 70, 100, 0.09);
+    padding: 2px 6px;
+}
+
+.bottomNote {
+    border-top: 2px dashed #e6c38e;
+    margin-top: 2px;
+    padding: 20px 0 80px 0;
+    /* padding-bottom lớn để không bị che */
+    color: #777;
+    text-align: center;
+    font-size: 0.99rem;
+    line-height: 1.4;
+}
+
+.bottomNote div {
+    margin-bottom: 2px;
+    padding-bottom: 0;
+}
+
+@media (max-width: 950px) {
+    .gridContainer {
+        flex-direction: column;
+    }
+
+    .col1,
+    .col2,
+    .col3,
+    .col4 {
+        min-width: 0;
+    }
+
+    .aboutWrapper {
+        padding: 20px 2vw 5px 2vw;
+    }
+
+    .logo {
+        width: 100px;
+    }
+}
+
+@media (max-width: 700px) {
+    .bottomNote {
+        padding-bottom: 110px;
+    }
+}

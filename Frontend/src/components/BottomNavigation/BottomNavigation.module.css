@@ -1,0 +1,114 @@
+.bottomNav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    /* Đặt ở giữa theo chiều ngang */
+    transform: translateX(-50%);
+    /* Căn giữa hoàn toàn */
+    width: auto;
+    /* Không chiếm toàn bộ chiều rộng */
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    box-sizing: border-box;
+}
+
+.bottomNav nav {
+    width: 500px;
+    /* Chiều rộng cố định cho thanh nav */
+    max-width: 95%;
+    /* Đảm bảo không tràn trên màn hình nhỏ */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: transparent;
+    padding: 0 15px;
+    /* Thêm padding ngang */
+    box-sizing: border-box;
+}
+
+.navIcons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.navIcons li {
+    text-align: center;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.navIcons a {
+    text-decoration: none;
+    color: #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, font-size 0.2s ease, padding 0.2s ease;
+    width: 45px;
+    height: 45px;
+    font-size: 1em;
+}
+
+/* Style riêng cho icon lớn ở giữa */
+.navIcons li:nth-child(2) a {
+    width: 60px;
+    height: 60px;
+    font-size: 1.6em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.navIcons a:hover {
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+}
+
+/* Media query cho màn hình nhỏ hơn */
+@media (max-width: 768px) {
+    .bottomNav {
+        padding: 10px 0;
+    }
+
+    .bottomNav nav {
+        width: 100%;
+        /* Chiếm toàn bộ chiều rộng trên mobile */
+        max-width: 400px;
+        /* Giới hạn tối đa để không quá rộng */
+        padding: 0 15px;
+    }
+
+    .navIcons {
+        gap: 15px;
+    }
+
+    .navIcons li {
+        height: 40px;
+    }
+
+    .navIcons a {
+        width: 40px;
+        height: 40px;
+        font-size: 1em;
+    }
+
+    .navIcons li:nth-child(2) a {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4em;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+    }
+}

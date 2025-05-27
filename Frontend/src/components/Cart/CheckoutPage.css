@@ -1,0 +1,532 @@
+.checkout2-root {
+    background: #fffaf3;
+    min-height: 100vh;
+    padding: 32px 0 54px 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.checkout2-form {
+    max-width: 1160px;
+    background: #fff;
+    margin: 0 auto;
+    border-radius: 16px;
+    box-shadow: 0 3px 20px #ffd49e34;
+    padding: 34px 38px 32px 38px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.checkout2-row {
+    display: flex;
+    gap: 48px;
+}
+
+.checkout2-col1,
+.checkout2-col2 {
+    flex: 1;
+    min-width: 350px;
+}
+
+.checkout2-title {
+    font-size: 1.32rem;
+    font-weight: bold;
+    margin-bottom: 19px;
+    color: #e08513;
+    letter-spacing: 0.01em;
+}
+
+.checkout2-section-title {
+    font-size: 1.09rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #b7750d;
+    margin-top: 28px;
+}
+
+.checkout2-form input[type="text"],
+.checkout2-form input[type="email"],
+.checkout2-form textarea,
+.checkout2-address-selects select {
+    width: 100%;
+    font-size: 1.01rem;
+    padding: 10px 13px;
+    border: 1.5px solid #ffe1b2;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    background: #fffdf9;
+    transition: border 0.15s;
+    color: #a47218;
+}
+
+.checkout2-form input[type="text"]:focus,
+.checkout2-form input[type="email"]:focus,
+.checkout2-form textarea:focus,
+.checkout2-address-selects select:focus {
+    border: 1.5px solid #e2a22b;
+    outline: none;
+}
+
+.checkout2-address-selects {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.checkout2-address-selects select {
+    flex: 1;
+    min-width: 0;
+}
+
+.checkout2-form textarea {
+    min-height: 40px;
+    max-height: 96px;
+    resize: vertical;
+}
+
+.checkout2-payment-methods-noradio {
+    border-radius: 9px;
+    background: #fffaf3;
+    border: 1.5px solid #ffe3ac;
+    margin-bottom: 15px;
+    margin-top: 4px;
+    padding: 5px 0 6px 0;
+}
+
+.custom-pay-method {
+    cursor: pointer;
+    border-bottom: 1px solid #fff1d0;
+    padding: 16px 18px 12px 12px;
+    font-size: 1.08rem;
+    position: relative;
+    background: transparent;
+    outline: none;
+    transition: background .18s, box-shadow .13s;
+}
+
+.custom-pay-method:last-child {
+    border-bottom: none;
+}
+
+.custom-pay-method:hover,
+.custom-pay-method.active {
+    background: #fff3e0;
+    box-shadow: 0 2px 12px #ffe6b760;
+}
+
+.custom-pay-method-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    color: #a47218;
+}
+
+.custom-pay-method.active .custom-pay-method-label {
+    color: #d88912;
+    font-weight: bold;
+}
+
+.custom-pay-method-drop {
+    background: #fff6e5;
+    border-radius: 7px;
+    border: 1.5px dashed #ffd383;
+    margin-top: 13px;
+    margin-bottom: 0;
+    padding: 14px 22px 15px 16px;
+    font-size: 1rem;
+    color: #61410d;
+    box-shadow: 0 2px 18px #ffdfa055;
+    z-index: 5;
+    position: relative;
+    animation: fadeDrop .25s;
+}
+
+@keyframes fadeDrop {
+    from {
+        opacity: 0;
+        transform: translateY(-7px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.checkout2-bankinfo b,
+.custom-pay-method-drop b {
+    color: #e08513;
+}
+
+.checkout2-bankinfo span {
+    font-weight: 500;
+    color: #a0610b;
+}
+
+.checkout2-shipping-title {
+    font-size: 1.13rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #e08513;
+    letter-spacing: 0.01em;
+}
+
+.checkout2-shipping-info {
+    background: #fff4de;
+    color: #b48a1d;
+    border: 1.5px dashed #ffd78c;
+    border-radius: 8px;
+    font-size: 1rem;
+    padding: 15px 18px;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.checkout2-shipping-box {
+    background: #fffdfa;
+    border-radius: 9px;
+    border: 1.5px solid #ffe3ac;
+    margin-bottom: 16px;
+}
+
+.checkout2-shipping-radio {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 14px 13px 14px;
+    border-bottom: 1px solid #fff1d0;
+    font-size: 1.03rem;
+    color: #8b6007;
+    cursor: pointer;
+    background: transparent;
+    transition: background .16s;
+    position: relative;
+}
+
+.checkout2-shipping-radio:last-child {
+    border-bottom: none;
+}
+
+.checkout2-shipping-radio.checked,
+.checkout2-shipping-radio:hover {
+    background: #fff3e0;
+    color: #a57216;
+}
+
+.checkout2-shipping-radio input[type="radio"] {
+    accent-color: #e08513;
+    margin-right: 10px;
+}
+
+.checkout2-cartbox {
+    background: #fffdf7;
+    border-radius: 12px;
+    border: 1.5px solid #ffe3ac;
+    padding: 21px 16px 13px 16px;
+    margin-top: 18px;
+}
+
+.checkout2-cart-title {
+    font-weight: bold;
+    color: #bc7d09;
+    margin-bottom: 10px;
+    font-size: 1.08rem;
+    letter-spacing: 0.01em;
+}
+
+.checkout2-cart-list {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.checkout2-cart-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #f4e3bc;
+    padding: 7px 0;
+}
+
+.checkout2-cart-item:last-child {
+    border-bottom: none;
+}
+
+.checkout2-cart-item img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #fff9e6;
+    border: 1px solid #ffe3ac;
+}
+
+.checkout2-cart-item-title {
+    font-size: 1.01rem;
+    font-weight: 500;
+    color: #b87915;
+}
+
+.checkout2-cart-item-info {
+    flex: 1;
+    color: #947111;
+}
+
+.checkout2-cart-item-price {
+    font-weight: bold;
+    color: #e08513;
+    font-size: 1rem;
+    min-width: 78px;
+    text-align: right;
+}
+
+.checkout2-cart-summary {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border-top: 1px solid #ffe3ac;
+    border-bottom: 1px solid #ffe3ac;
+    padding: 9px 0 5px 0;
+}
+
+.checkout2-cart-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 2px;
+    font-size: 1.01rem;
+    color: #886711;
+}
+
+.checkout2-cart-row.checkout2-cart-total {
+    color: #e08513;
+    font-weight: bold;
+    font-size: 1.09rem;
+    border-top: 1px solid #ffe3ac;
+    margin-top: 8px;
+    padding-top: 7px;
+}
+
+.checkout2-cart-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-top: 15px;
+}
+
+.checkout2-back-link {
+    color: #e08513;
+    text-decoration: underline;
+    font-size: .99rem;
+    font-weight: 500;
+    transition: color .12s;
+}
+
+.checkout2-back-link:hover {
+    color: #ad6902;
+}
+
+.checkout2-order-btn {
+    background: linear-gradient(94deg, #eeb95e 0%, #e08513 100%);
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.09rem;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 28px;
+    box-shadow: 0 2px 10px #ffe3ac66;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: background .14s, box-shadow .14s;
+}
+
+.checkout2-order-btn:hover {
+    background: linear-gradient(94deg, #fdc55d 0%, #c97902 100%);
+    box-shadow: 0 3px 15px #ffcc8b78;
+}
+
+@media (max-width: 1050px) {
+    .checkout2-form {
+        padding: 22px 5vw 18px 5vw;
+    }
+
+    .checkout2-row {
+        gap: 18px;
+    }
+}
+
+@media (max-width: 800px) {
+    .checkout2-row {
+        flex-direction: column;
+    }
+
+    .checkout2-col1,
+    .checkout2-col2 {
+        min-width: unset;
+    }
+
+    .checkout2-form {
+        padding: 12px 2vw;
+    }
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffe9b6;
+    border-radius: 7px;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    background: #fff8ea;
+}
+
+.checkout2-payment-methods-radio {
+    border-radius: 10px;
+    background: #fffaf3;
+    border: 1.5px solid #ffe3ac;
+    margin-bottom: 15px;
+    margin-top: 4px;
+    padding: 8px 0 10px 0;
+}
+
+/* ==== RADIO THANH TOÁN ĐẸP (E-COMMERCE) ==== */
+.checkout2-payment-methods-radio {
+    border-radius: 10px;
+    background: #fffaf3;
+    border: 1.5px solid #ffe3ac;
+    margin-bottom: 15px;
+    margin-top: 4px;
+    padding: 8px 0 10px 0;
+}
+
+.custom-pay-method-radio {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    padding: 14px 16px 14px 6px;
+    margin-bottom: 9px;
+    border-radius: 12px;
+    border: 1.5px solid transparent;
+    background: transparent;
+    transition: background 0.18s, border 0.13s, box-shadow 0.14s;
+}
+
+.custom-pay-method-radio.checked,
+.custom-pay-method-radio:hover {
+    background: #fff7e5;
+    border-color: #ffdba7;
+    box-shadow: 0 2px 12px #ffe5be1c;
+}
+
+.custom-radio {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    margin-right: 15px;
+    border: 2.5px solid #eac179;
+    background: #fff;
+    outline: none;
+    position: relative;
+    transition: border 0.17s, box-shadow 0.17s;
+    box-shadow: 0 1.5px 7px #ffe3ac2c;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+/* Khi radio được chọn */
+.custom-radio:checked {
+    border: 7px solid #e08513;
+    background: #fff;
+}
+
+.custom-radio:focus-visible {
+    outline: 2px solid #f5d393;
+}
+
+/* Tick cam ở giữa khi checked */
+.custom-radio::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 6.5px;
+    top: 6.5px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #e08513;
+    opacity: 0;
+    transition: opacity 0.17s;
+}
+
+.custom-radio:checked::after {
+    opacity: 1;
+}
+
+.custom-pay-method-label {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    color: #b17913;
+    font-size: 1.11rem;
+    gap: 10px;
+    transition: color 0.18s;
+}
+
+.custom-pay-method-radio.checked .custom-pay-method-label {
+    color: #e08513;
+    font-weight: 700;
+}
+
+.custom-pay-method-drop {
+    background: #fff6e5;
+    border-radius: 11px;
+    border: 2px dashed #ffd383;
+    margin-top: 13px;
+    margin-bottom: 0;
+    padding: 14px 22px 14px 17px;
+    font-size: 1rem;
+    color: #61410d;
+    box-shadow: 0 2px 12px #ffdfa033;
+    z-index: 5;
+    position: relative;
+    animation: fadeDrop .25s;
+}
+
+/* Responsive giữ nguyên */
+@media (max-width: 1050px) {
+    .checkout2-form {
+        padding: 22px 5vw 18px 5vw;
+    }
+
+    .checkout2-row {
+        gap: 18px;
+    }
+}
+
+@media (max-width: 800px) {
+    .checkout2-row {
+        flex-direction: column;
+    }
+
+    .checkout2-col1,
+    .checkout2-col2 {
+        min-width: unset;
+    }
+
+    .checkout2-form {
+        padding: 12px 2vw;
+    }
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffe9b6;
+    border-radius: 7px;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    background: #fff8ea;
+}

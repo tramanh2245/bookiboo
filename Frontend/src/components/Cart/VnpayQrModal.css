@@ -1,0 +1,143 @@
+.vnpay-modal-overlay {
+    z-index: 9999;
+    position: fixed;
+    inset: 0;
+    background: rgba(50, 30, 10, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vnpay-modal-content {
+    background: #fff;
+    border-radius: 18px;
+    max-width: 450px;
+    width: 96vw;
+    box-shadow: 0 6px 60px #bbb4a137, 0 1.5px 5px #e085131a;
+    padding: 0 0 22px 0;
+    animation: fadeDrop .3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.vnpay-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1.5px solid #f4e3bc;
+    padding: 20px 28px 13px 28px;
+    position: relative;
+    justify-content: space-between;
+}
+
+.vnpay-modal-title {
+    font-weight: 700;
+    color: #1867be;
+    font-size: 1.14rem;
+    letter-spacing: .01em;
+    flex: 1;
+}
+
+.vnpay-modal-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #888;
+    cursor: pointer;
+    position: absolute;
+    right: 18px;
+    top: 16px;
+    transition: color .17s;
+}
+
+.vnpay-modal-close:hover {
+    color: #e08513;
+}
+
+.vnpay-modal-body {
+    display: flex;
+    padding: 24px 32px 6px 32px;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.vnpay-modal-col {
+    flex: 1.2;
+    min-width: 170px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    justify-content: center;
+}
+
+.vnpay-modal-amount {
+    font-size: 1.55rem;
+    font-weight: bold;
+    color: #e08513;
+    margin-bottom: 5px;
+}
+
+.vnpay-modal-orderid,
+.vnpay-modal-supplier {
+    color: #4a4866;
+    font-size: 1rem;
+}
+
+.vnpay-modal-orderid b,
+.vnpay-modal-supplier b {
+    color: #d08719;
+}
+
+.vnpay-modal-qrbox {
+    flex: 1;
+    text-align: center;
+}
+
+.vnpay-modal-qrimg {
+    width: 142px;
+    height: 142px;
+    object-fit: contain;
+    border: 1.5px dashed #e6c998;
+    border-radius: 16px;
+    background: #fff9f3;
+    margin-bottom: 7px;
+    box-shadow: 0 2px 10px #ffe3ac2b;
+}
+
+.vnpay-modal-qrinstruct {
+    font-size: .99rem;
+    color: #226dba;
+    margin-top: 5px;
+}
+
+.vnpay-modal-actions {
+    text-align: center;
+    margin: 10px 0 0 0;
+}
+
+.vnpay-btn-done {
+    background: linear-gradient(94deg, #7ac7f6 0%, #0f7adb 100%);
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 36px;
+    font-size: 1.09rem;
+    margin-top: 6px;
+    cursor: pointer;
+    transition: background .15s, box-shadow .13s;
+    box-shadow: 0 1.5px 10px #acd8fc34;
+}
+
+.vnpay-btn-done:hover {
+    background: linear-gradient(94deg, #37bbfc 0%, #0e599d 100%);
+}
+
+.vnpay-modal-footer {
+    text-align: center;
+    font-size: .99rem;
+    color: #997d52;
+    margin-top: 8px;
+    padding-bottom: 5px;
+}

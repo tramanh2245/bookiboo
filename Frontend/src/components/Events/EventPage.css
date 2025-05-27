@@ -1,0 +1,127 @@
+/* EventPage.css */
+.event-list-container {
+    padding: 32px;
+}
+
+.event-list-grid {
+    display: flex;
+    gap: 28px;
+}
+
+.event-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 1px 8px #ddd;
+    width: 390px;
+    padding: 18px;
+    text-align: center;
+    text-decoration: none;
+    color: #111;
+    position: relative;
+    transition: box-shadow 0.2s;
+}
+
+.event-card:hover {
+    box-shadow: 0 6px 32px #b3c;
+}
+
+.event-card-img {
+    width: 100%;
+    border-radius: 14px;
+}
+
+.event-card-title {
+    font-weight: bold;
+    font-size: 22px;
+    margin: 12px 0 4px;
+}
+
+.event-card-date {
+    position: absolute;
+    left: 18px;
+    top: 12px;
+    background: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 2px 8px;
+    font-size: 14px;
+}
+
+.event-card-meta {
+    font-size: 15px;
+    color: #777;
+}
+
+.event-card-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-top: 12px;
+}
+
+/* EventDetail.css */
+.event-detail-container {
+    max-width: 740px;
+    margin: 32px auto;
+    padding: 24px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 2px 16px #ddd;
+}
+
+.event-detail-header {
+    text-align: center;
+}
+
+.event-detail-img {
+    width: 80%;
+    max-width: 420px;
+    border-radius: 16px;
+    margin-bottom: 18px;
+}
+
+.event-detail-date {
+    font-size: 17px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.event-detail-title {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.event-detail-meta {
+    color: #666;
+    font-size: 15px;
+}
+
+.event-detail-description {
+    margin: 22px 0;
+    font-size: 18px;
+}
+
+.event-detail-speaker {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.event-speaker-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid #ececec;
+}
+
+.event-speaker-name {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.event-speaker-role {
+    font-size: 15px;
+    color: #666;
+}

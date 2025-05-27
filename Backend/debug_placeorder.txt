@@ -1,0 +1,29 @@
+Array
+(
+    [email] => 
+    [name] => gfsgsgda
+    [phone] => 34235242
+    [address] => hjkj
+    [province] => 19
+    [district] => Huyện Phú Lương
+    [ward] => Xã Động Đạt
+    [note] => 
+    [otherAddress] => 
+    [payment_method] => cod
+    [city] => Tỉnh Thái Nguyên
+    [shipping_method] => fast
+    [shipping_fee] => 29000
+    [items] => Array
+        (
+            [0] => Array
+                (
+                    [book_id] => 32
+                    [title] => Thức Dậy Đi
+                    [price] => 34000.00
+                    [quantity] => 1
+                )
+
+        )
+
+    [user_id] => 4
+)
