@@ -9,7 +9,8 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 $vnp_TmnCode    = "XPSCB6I6";
 $vnp_HashSecret = "4ZI0ENPIZ84B5PIKFCEHA3O2L8DXYVHH";
 $vnp_Url        = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-$vnp_ReturnUrl  = "http://localhost:3000/vnpay_callback";
+$vnp_ReturnUrl = "http://localhost:8080/bookiboo/Backend/vnpay_callback.php";
+
 
 // --- NHẬN DỮ LIỆU TỪ FRONTEND ---
 $data = json_decode(file_get_contents("php://input"), true);
@@ -36,11 +37,23 @@ $inputData = [
 // SẮP XẾP THEO KEY (BẮT BUỘC)
 ksort($inputData);
 
-// --- BUILD HASHDATA CHUẨN NHẤT ---
-$hashdata = urldecode(http_build_query($inputData, '', '&', PHP_QUERY_RFC3986));
 
-// --- TẠO SECURE HASH CHUẨN ---
+// --- BUILD HASHDATA CHUẨN NHẤT (KHÔNG ENCODE) ---
+ksort($inputData);
+$hashdataArr = [];
+foreach ($inputData as $key => $value) {
+    $hashdataArr[] = $key . '=' . $value;
+}
+$hashdata = implode('&', $hashdataArr); // KHÔNG ENCODE value ở đây!
 $vnp_SecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret);
+
+$query = [];
+foreach ($inputData as $key => $value) {
+    $query[] = urlencode($key) . "=" . urlencode($value);
+}
+$queryString = implode("&", $query);
+$vnp_PaymentUrl = $vnp_Url . "?" . $queryString . "&vnp_SecureHash=" . $vnp_SecureHash;
+
 
 // --- BUILD QUERY STRING CHUẨN ---
 $query = [];

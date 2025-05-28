@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $data = json_decode(file_get_contents('php://input'), true);
 $userText = $data['prompt'] ?? '';
 
-$apiKey = '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';
+$apiKey = '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';
 $url = "https://openrouter.ai/api/v1/chat/completions";
 
 $postData = [

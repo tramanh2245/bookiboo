@@ -1,8 +1,7 @@
 <?php
 require_once __DIR__ . '/config.php';
 date_default_timezone_set('Asia/Ho_Chi_Minh');
-
-$vnp_HashSecret = "SECRETKEY123456789";
+$vnp_HashSecret = "YOUR_HASH_SECRET_HERE"; // Phải đúng với test/prod
 
 $vnp_SecureHash = $_GET['vnp_SecureHash'] ?? '';
 $inputData = [];
@@ -29,5 +28,6 @@ if ($order_id && $secureHash === $vnp_SecureHash) {
     $stmt->execute([$status, $order_id]);
 }
 
+// Redirect về React để hiển thị kết quả
 header('Location: http://localhost:3000/vnpay_callback?order_id=' . $order_id . '&status=' . $status);
 exit;

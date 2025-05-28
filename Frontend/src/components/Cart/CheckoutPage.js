@@ -15,13 +15,19 @@ const paymentMethods = [
     value: "vnpayqr",
     label: "Thanh toán qua VNPAY-QR",
     icon: <FaBarcode style={{ color: "#3b8be7", marginRight: 6 }} />
+  },
+  {
+    value: "momo",
+    label: "Thanh toán qua MoMo QR",
+    icon: (
+      <img
+        src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png"
+        alt="MoMo"
+        style={{ width: 20, height: 20, marginRight: 6, verticalAlign: "middle" }}
+      />
+    )
   }
 ];
-
-const VNPAY_INFO = {
-  qrImage: "/img/vnpay-qr-demo.png",
-  instructions: "Quét mã QR bằng app ngân hàng hoặc ví điện tử để thanh toán đơn hàng."
-};
 
 const shippingMethods = [
   { value: "fast", label: "Giao hàng nhanh - chuyển phát thương mại điện tử", price: 29000 },
@@ -65,7 +71,7 @@ const CheckoutPage = () => {
   const [shipping, setShipping] = useState(shippingMethods[0].value);
   const [selectedPayment, setSelectedPayment] = useState("cod");
 
-  // Discount code
+  // Discount code (chỉ cho VNPAY)
   const [discountCode, setDiscountCode] = useState("");
   const [discountValid, setDiscountValid] = useState(false);
 
@@ -104,7 +110,7 @@ const CheckoutPage = () => {
     setForm(f => ({ ...f, ward: "" }));
   }, [form.district, districts]);
 
-  // Tổng tiền sau giảm giá (nếu có)
+  // Tổng tiền sau giảm giá (nếu có, chỉ áp dụng cho VNPAY)
   const total =
     cartSubtotal +
     (shippingMethods.find(m => m.value === shipping)?.price || 0) -
@@ -145,7 +151,7 @@ const CheckoutPage = () => {
       return;
     }
     try {
-      // 1. Lưu đơn hàng trước (ĐÚNG FILE!)
+      // 1. Lưu đơn hàng trước
       const orderRes = await fetch("http://localhost:8080/bookiboo/Backend/user/orderUser.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -157,9 +163,9 @@ const CheckoutPage = () => {
           ward: wards.find(w => w.code.toString() === form.ward)?.name || "",
           note: form.note,
           payment_method: selectedPayment,
-          status: selectedPayment === "vnpayqr" ? "pending" : "completed",
+          status: ["vnpayqr", "momo"].includes(selectedPayment) ? "pending" : "completed",
           total_price: total,
-          items: cartItems // PHẢI GỬI DANH SÁCH SẢN PHẨM!
+          items: cartItems
         })
       });
       const orderData = await orderRes.json();
@@ -168,12 +174,9 @@ const CheckoutPage = () => {
         return;
       }
       const orderId = orderData.order_id;
-  
+
       if (selectedPayment === "vnpayqr") {
-        // 2. Gọi API tạo QR VNPAY, truyền order_id
-        const vnpayAmount = Math.round(
-          cartSubtotal + (selectedShipping?.price || 0) - (discountValid ? cartSubtotal * 0.1 : 0)
-        );
+        const vnpayAmount = Math.round(cartSubtotal + (selectedShipping?.price || 0) - (discountValid ? cartSubtotal * 0.1 : 0));
         const res = await fetch("http://localhost:8080/bookiboo/Backend/vnpay_test.php", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -190,16 +193,34 @@ const CheckoutPage = () => {
           alert("Không lấy được mã QR thanh toán VNPAY!");
         }
         return;
-      } else {
-        // COD: redirect trang cảm ơn luôn
-        window.location.href = "/vnpay_callback?status=success&order_id=" + orderId + "&amount=" + total;
       }
+
+      if (selectedPayment === "momo") {
+        const momoAmount = Math.round(cartSubtotal + (selectedShipping?.price || 0));
+        const res = await fetch("http://localhost:8080/bookiboo/Backend/momo_create.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amount: momoAmount,
+            orderInfo: "Thanh toán đơn hàng Bookiboo #" + orderId,
+            order_id: orderId
+          })
+        });
+        const data = await res.json();
+        if (data && data.payUrl) {
+          window.open(data.payUrl, "_blank");
+        } else {
+          alert("Không lấy được mã QR thanh toán MoMo!");
+        }
+        return;
+      }
+
+      // COD: redirect trang cảm ơn luôn
+      window.location.href = "/vnpay_callback?status=success&order_id=" + orderId + "&amount=" + total;
     } catch (err) {
       alert("Lỗi kết nối máy chủ: " + err.message);
     }
   };
-  
-  
 
   // Check mã giảm giá realtime
   useEffect(() => {
@@ -265,7 +286,7 @@ const CheckoutPage = () => {
             {/* Chỉ hiện nhập mã giảm giá khi chọn VNPAY */}
             {selectedPayment === "vnpayqr" && (
               <div style={{ marginTop: 14 }}>
-                <b>Nhập mã giảm giá để nhận giảm 10%:</b>
+                <b>Nhập mã giảm giá để nhận giảm 10% (không bắt buộc):</b>
                 <input
                   type="text"
                   placeholder="Nhập mã giảm giá (ví dụ: GIAM10)"
@@ -275,10 +296,10 @@ const CheckoutPage = () => {
                     padding: 7, borderRadius: 6, border: "1px solid #ddd", width: 180, marginLeft: 8
                   }}
                 />
-                <div style={{ color: discountValid ? "#0ca750" : "#d8000c", marginTop: 6 }}>
+                <div style={{ color: discountValid ? "#0ca750" : "#222", marginTop: 6 }}>
                   {discountValid
                     ? "Áp dụng thành công - bạn sẽ được giảm 10% tổng giá trị sản phẩm!"
-                    : "Mã giảm giá không hợp lệ hoặc chưa nhập (dùng GIAM10)"}
+                    : "Không nhập mã, bạn vẫn thanh toán bình thường."}
                 </div>
               </div>
             )}
@@ -384,7 +405,11 @@ const CheckoutPage = () => {
                   disabled={shippingTooHeavy}
                   style={shippingTooHeavy ? { opacity: 0.6, cursor: "not-allowed" } : {}}
                 >
-                  {selectedPayment === "vnpayqr" ? "Xác nhận thanh toán" : "Đặt hàng"}
+                  {selectedPayment === "vnpayqr"
+                    ? "Xác nhận thanh toán VNPAY"
+                    : selectedPayment === "momo"
+                    ? "Xác nhận thanh toán MoMo"
+                    : "Đặt hàng"}
                 </button>
               </div>
             </div>
