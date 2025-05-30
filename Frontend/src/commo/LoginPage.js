@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { useAuth } from "../hooks/useAuth"; 
+import { useAuth } from "../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
-
-// Đảm bảo đúng path
 
 const LoginPage = ({ onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { login, auth } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -16,6 +14,7 @@ const LoginPage = ({ onClose }) => {
     e.preventDefault();
     setError("");
     const result = await login(email, password);
+
     if (result && result.user?.role === "admin") {
       navigate("/admin/dashboard", { replace: true });
     } else if (result && result.user?.role === "user") {
@@ -25,11 +24,9 @@ const LoginPage = ({ onClose }) => {
       setError("Email hoặc mật khẩu không đúng!");
     }
   };
-  
-  
 
   const handleRegister = () => {
-    navigate("/register"); // Điều hướng sang trang đăng ký, hoặc đổi lại nếu bạn muốn popup khác
+    navigate("/register");
   };
 
   return (
@@ -42,7 +39,6 @@ const LoginPage = ({ onClose }) => {
       padding: 32,
       position: "relative"
     }}>
-      {/* Nút đóng popup */}
       {onClose && (
         <button
           onClick={onClose}

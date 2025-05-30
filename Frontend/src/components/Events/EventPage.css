@@ -12,8 +12,10 @@
     background: #fff;
     border-radius: 20px;
     box-shadow: 0 1px 8px #ddd;
-    width: 390px;
+    width: 100px;
+    /* height: 400px; */
     padding: 18px;
+    /* margin: 100px 0; */
     text-align: center;
     text-decoration: none;
     color: #111;
@@ -26,7 +28,7 @@
 }
 
 .event-card-img {
-    width: 100%;
+    width: 50%;
     border-radius: 14px;
 }
 

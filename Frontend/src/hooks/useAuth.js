@@ -39,12 +39,13 @@ export const AuthProvider = ({ children }) => {
   // Hàm đăng ký
   const register = async (userData) => {
     try {
-      const newUser = await authService.register(userData);
-      return true;
+      const res = await authService.register(userData);
+      return res; // response là object JSON thực sự trả về từ backend
     } catch (error) {
-      return false;
+      return { error: error.message || "Unknown error" };
     }
   };
+  
 
   // Hàm đăng xuất
   const logout = () => {

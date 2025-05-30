@@ -74,10 +74,27 @@ switch ("$resource|$action") {
         getAllCategories();
         break;
 
-    case 'admin|getDashboard':
+    case 'dashboard|stats':
         require_once "admin/dashboard.php";
         getDashboard();
         break;
+
+    // Route lấy doanh thu theo khoảng thời gian
+    case 'dashboard|revenue_range':
+        // Đảm bảo đã kết nối PDO ($pdo)
+        $from = $_GET['date_from'] ?? null;
+        $to = $_GET['date_to'] ?? null;
+        if ($from && $to) {
+            $stmt = $pdo->prepare("SELECT IFNULL(SUM(total_price),0) as revenue FROM orders WHERE DATE(created_at) BETWEEN ? AND ? AND status='completed'");
+            $stmt->execute([$from, $to]);
+            $revenue = (int)$stmt->fetchColumn();
+            header('Content-Type: application/json');
+            echo json_encode(['success' => true, 'revenue' => $revenue]);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'message' => 'Missing date_from or date_to']);
+        }
+        exit;
 
     case 'admin|getUsers':
         require_once "admin/userAdmin.php";

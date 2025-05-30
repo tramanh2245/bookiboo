@@ -530,3 +530,49 @@
     width: 7px;
     background: #fff8ea;
 }
+
+.checkout2-phone-group {
+    position: relative;
+    margin-bottom: 14px;
+    width: 100%;
+}
+
+.checkout2-phone-addon {
+    position: absolute;
+    left: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 600;
+    color: #e08513;
+    font-size: 1.17rem;
+    pointer-events: none;
+    user-select: none;
+    z-index: 2;
+}
+
+.checkout2-phone-inone {
+    width: 100%;
+    height: 48px;
+    padding: 0 13px 0 58px;
+    /* Chừa bên trái đủ rộng cho +84 */
+    font-size: 1.14rem;
+    background: #fffdf9;
+    color: #a47218;
+    border: 1.5px solid #ffe1b2;
+    border-radius: 8px;
+    outline: none;
+    transition: border 0.15s;
+    box-sizing: border-box;
+    display: block;
+    font-weight: 500;
+}
+
+.checkout2-phone-inone:focus {
+    border-color: #e2a22b;
+}
+
+.checkout2-phone-inone::placeholder {
+    color: #bfb7a3;
+    font-size: 1.08rem;
+    font-weight: 400;
+}

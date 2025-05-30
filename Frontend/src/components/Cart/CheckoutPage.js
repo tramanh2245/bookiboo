@@ -51,8 +51,12 @@ const getShippingFee = (qty) => {
 const MAX_QTY = 10;
 
 const CheckoutPage = () => {
-  const { cartItems, cartSubtotal } = useCart();
+  const { cartItems, cartSubtotal/*, clearCart*/ } = useCart();
   const { auth } = useAuth();
+
+  // State cho CẢM ƠN
+  const [orderSuccess, setOrderSuccess] = useState(false);
+  const [orderId, setOrderId] = useState(null);
 
   const [form, setForm] = useState({
     email: "",
@@ -175,6 +179,7 @@ const CheckoutPage = () => {
       }
       const orderId = orderData.order_id;
 
+      // VNPAY
       if (selectedPayment === "vnpayqr") {
         const vnpayAmount = Math.round(cartSubtotal + (selectedShipping?.price || 0) - (discountValid ? cartSubtotal * 0.1 : 0));
         const res = await fetch("http://localhost:8080/bookiboo/Backend/vnpay_test.php", {
@@ -195,6 +200,7 @@ const CheckoutPage = () => {
         return;
       }
 
+      // MoMo
       if (selectedPayment === "momo") {
         const momoAmount = Math.round(cartSubtotal + (selectedShipping?.price || 0));
         const res = await fetch("http://localhost:8080/bookiboo/Backend/momo_create.php", {
@@ -215,8 +221,15 @@ const CheckoutPage = () => {
         return;
       }
 
-      // COD: redirect trang cảm ơn luôn
-      window.location.href = "/vnpay_callback?status=success&order_id=" + orderId + "&amount=" + total;
+      // COD: Hiện cảm ơn ngay trên trang
+      if (selectedPayment === "cod") {
+        setOrderSuccess(true);
+        setOrderId(orderId);
+        // Nếu muốn clear giỏ hàng:
+        // clearCart && clearCart();
+        return;
+      }
+
     } catch (err) {
       alert("Lỗi kết nối máy chủ: " + err.message);
     }
@@ -228,6 +241,42 @@ const CheckoutPage = () => {
     else setDiscountValid(false);
   }, [discountCode]);
 
+  // ======= Hiển thị CẢM ƠN sau khi đặt COD =======
+  if (orderSuccess) {
+    return (
+      <div className="checkout2-success-root" style={{
+        maxWidth: 480, margin: "50px auto", padding: 30,
+        background: "#fff", borderRadius: 18, boxShadow: "0 2px 16px #eee"
+      }}>
+        <h2>Đặt hàng thành công!</h2>
+        <div style={{ margin: "16px 0", color: "#0ca750", fontWeight: "bold" }}>
+          Cảm ơn bạn đã mua sách tại Bookiboo.<br />
+          Mã đơn hàng: <b>#{orderId}</b><br />
+          Bạn sẽ thanh toán khi nhận hàng.<br />
+        </div>
+        <a
+          href="/"
+          style={{
+            display: "inline-block",
+            marginTop: 16,
+            background: "#e08513",
+            color: "#fff",
+            padding: "10px 28px",
+            borderRadius: 8,
+            textDecoration: "none",
+            fontWeight: "bold"
+          }}
+        >
+          Quay về trang chủ
+        </a>
+        <div style={{ marginTop: 24, color: "#222", fontSize: 15 }}>
+          Đơn hàng của bạn sẽ được vận chuyển tủ 3-5 ngày mọi thông tin chi tiết liên hệ bookiboo.vn
+        </div>
+      </div>
+    );
+  }
+
+  // ========== FORM GỐC =============
   return (
     <div className="checkout2-root">
       <form className="checkout2-form" onSubmit={handleSubmit} autoComplete="off">

@@ -24,22 +24,20 @@ const AllBooksPage = () => {
     fetch("http://localhost:8080/bookiboo/Backend/api.php?resource=user&action=getBooks")
       .then(res => res.json())
       .then(data => setBooks(Array.isArray(data) ? data : []));
-  }, []);
+    }, []);
 
   // Filter hoàn toàn trên frontend
   const filteredBooks = books.filter(book => {
-    // Lọc chuyên mục
     const byCat = !category || book.category === category;
-    // Lọc tồn kho
     const byStock = !stock || (stock === "in" ? Number(book.stock) > 0 : Number(book.stock) === 0);
-    // Lọc giá
-    const priceNum = parseFloat(book.price);
+    const priceNum = parseFloat(book.price); // Giá trị đúng là kiểu số (đồng)
     let byPrice = true;
-    if (price === "lt40") byPrice = priceNum < 40;
-    else if (price === "40-60") byPrice = priceNum >= 40 && priceNum <= 60;
-    else if (price === "gt60") byPrice = priceNum > 60;
+    if (price === "lt40") byPrice = priceNum < 40000;
+    else if (price === "40-60") byPrice = priceNum >= 40000 && priceNum <= 60000;
+    else if (price === "gt60") byPrice = priceNum > 60000;
     return byCat && byStock && byPrice;
   });
+  
 
   // Pagination
   const totalPage = Math.ceil(filteredBooks.length / PAGE_SIZE);
@@ -59,15 +57,15 @@ const AllBooksPage = () => {
         </select>
         <select value={stock} onChange={e => setStock(e.target.value)}>
           <option value="">Tất cả trạng thái</option>
-          <option value="in">Còn hàng</option>
-          <option value="out">Hết hàng</option>
+          <option value="out">Còn hàng</option>
+          <option value="in">Hết hàng</option>
         </select>
         <select value={price} onChange={e => setPrice(e.target.value)}>
-          <option value="">Tất cả giá</option>
-          <option value="lt40">Dưới 40.000đ</option>
-          <option value="40-60">40.000đ - 60.000đ</option>
-          <option value="gt60">Trên 60.000đ</option>
-        </select>
+  <option value="">Tất cả giá</option>
+  <option value="lt40">Dưới 40.000đ</option>
+  <option value="40-60">40.000đ - 60.000đ</option>
+  <option value="gt60">Trên 60.000đ</option>
+</select>
       </div>
       <BookList books={booksPage} />
       <Pagination totalPages={totalPage} currentPage={page} onPageChange={setPage} />

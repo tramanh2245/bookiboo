@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth"; // hoặc import { register } từ api nếu không dùng context
+import { useAuth } from "../hooks/useAuth";
 
 const RegisterPage = () => {
   const [form, setForm] = useState({
@@ -14,7 +14,7 @@ const RegisterPage = () => {
   const [error, setError] = useState("");
   const [registering, setRegistering] = useState(false);
 
-  const { register } = useAuth();  
+  const { register } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -51,12 +51,23 @@ const RegisterPage = () => {
         newsletter: form.newsletter,
       });
 
-      // Kiểm tra response trả về từ backend
-      if (response && response.message === "Registration successful") {
-        setError(""); // Xoá thông báo lỗi cũ nếu có
+      // --- CHỈ XỬ LÝ THÀNH CÔNG TẠI ĐÂY ---
+      if (
+        response &&
+        (
+          response.success === true ||
+          (response.message && response.message.toLowerCase().includes("registration successful")) ||
+          (response.message && response.message.includes("Đăng ký thành công"))
+        )
+      ) {
+        setError("");
         alert("Đăng ký thành công! Vui lòng đăng nhập.");
         navigate("/login");
-      } else if (response && response.error) {
+        return;
+      }
+
+      // --- CHỈ XỬ LÝ LỖI Ở DƯỚI ---
+      if (response && response.error) {
         setError(response.error);
       } else {
         setError("Đăng ký thất bại. Email có thể đã được sử dụng!");
@@ -136,7 +147,7 @@ const RegisterPage = () => {
             style={{ width: 18, height: 18, marginRight: 8 }}
           />
           <label htmlFor="agree" style={{ fontSize: 15 }}>
-            By continuing, I agree to Powell's Terms of Service and acknowledge Powell's Privacy Policy.
+            By continuing, I agree to bookiboo Terms of Service and acknowledge bookiboo Privacy Policy.
           </label>
         </div>
         {/* Checkbox 2: Newsletter */}
@@ -150,7 +161,7 @@ const RegisterPage = () => {
             style={{ width: 18, height: 18, marginRight: 8 }}
           />
           <label htmlFor="newsletter" style={{ fontSize: 15 }}>
-            Sign up for the Powell's newsletter to receive books lists, events info, special offers, and more. You can unsubscribe at any time.
+            Sign up for the bookiboo newsletter to receive books lists, events info, special offers, and more. You can unsubscribe at any time.
           </label>
         </div>
         <button

@@ -4,7 +4,6 @@
 ## 👥 Team Members
 1. **Vu Thi Hoai Thu** - T1S2404004 - Project Lead
 2. **Than The Loc** - T1S2404009 - Developer
-3. **Nguyen Khai Nguyen** - T1S2405014 - Developer
 
 ---
 
@@ -39,7 +38,7 @@ git clone https://github.com/tramanh2245/bookiboo.git
 Documetation included on the main folder:
 1) Intallation guide
 2) Documentation : 'REVIEW_FINAL_GROUP3_bookiboo'
-3) Link to video demonstration: 
+3) Link to video demonstration: https://youtu.be/R2MAOkSbeJM
 
 ## 🙏 Acknowledgements
 Thank you for your time and interest in Bookiboo!  

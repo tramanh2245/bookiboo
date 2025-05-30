@@ -6,7 +6,6 @@ const AdminPage = () => {
     <div>
       <style>
         {`
-        /* -- ĐÃ ĐỒNG BỘ CSS ĐÚNG STYLE TỐI NHƯ BÊN NGOÀI -- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f9; }
         .container { display: flex; min-height: 100vh; }
@@ -37,6 +36,10 @@ const AdminPage = () => {
         <aside>
           <h1>📚 Admin Panel</h1>
           <nav>
+            {/* Quay về trang chủ */}
+            <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>
+              🏠 Trang chủ
+            </NavLink>
             <NavLink to="/admin/dashboard" className={({ isActive }) => (isActive ? 'active' : '')}>
               📊 Dashboard
             </NavLink>
